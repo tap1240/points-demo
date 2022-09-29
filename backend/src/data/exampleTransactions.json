@@ -1,0 +1,32 @@
+[
+  {
+    "id": "e3984d2d-9e25-4d73-89ba-fd5a8a912729",
+    "payer": "DANNON",
+    "points": 1000,
+    "timestamp": "2020-11-02T14:00:00Z"
+  },
+  {
+    "id": "1c6d564d-12e8-46ad-9c9a-764026aca7ca",
+    "payer": "UNILEVER",
+    "points": 200,
+    "timestamp": "2020-10-31T11:00:00Z"
+  },
+  {
+    "id": "3bc2ead7-bcf5-4d5d-b360-c4fb9cf7cf3e",
+    "payer": "DANNON",
+    "points": -200,
+    "timestamp": "2020-10-31T15:00:00Z"
+  },
+  {
+    "id": "1cd64a18-1df1-48f6-8200-55aecdb6e1d1",
+    "payer": "MILLER COORS",
+    "points": 10000,
+    "timestamp": "2020-11-01T14:00:00Z"
+  },
+  {
+    "id": "4a1231c0-314d-41e9-9b88-66152328dd02",
+    "payer": "DANNON",
+    "points": 300,
+    "timestamp": "2020-10-31T10:00:00Z"
+  }
+]
