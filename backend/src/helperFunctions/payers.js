@@ -7,9 +7,9 @@ function getBalance(transactions, id = null) {
     }
 
     if (balances[tx.payer]) {
-      balances[tx.payer] += tx.points;
+      balances[tx.payer] += tx.pointsRemaining;
     } else {
-      balances[tx.payer] = tx.points;
+      balances[tx.payer] = tx.pointsRemaining;
     }
   });
 

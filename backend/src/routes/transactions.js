@@ -18,9 +18,13 @@ router.get("/tx", (req, res) => {
 // {id: (string), payer: (string), points: (integer), timestamp: (string)}
 router.post("/addTx", (req, res) => {
   const { payer, points, timestamp } = req.body;
+  if (!payer || !points) {
+    res.send("missing parameters");
+    return;
+  }
   const id = uuidv4();
 
-  const transaction = { id, payer, points, timestamp };
+  const transaction = { id, payer, points, pointsRemaining: points, timestamp };
   const transactions = addTx(transaction);
   res.send(transactions);
 });
@@ -43,7 +47,7 @@ router.get("/addTxManual", (req, res) => {
 
   const { payer, points, timestamp } = req.query;
   const id = uuidv4();
-  const transaction = { id, payer, points, timestamp };
+  const transaction = { id, payer, points, pointsRemaining: points, timestamp };
 
   addTx(transaction);
 
