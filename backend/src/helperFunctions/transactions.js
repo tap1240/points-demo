@@ -136,6 +136,7 @@ function spendPoints(transactions, points) {
 
   // *** becomes redundant after adding pointsRemaining and spent fields to tx object
   // could be a talking point on how to handle this situation
+  // add type to transactions, spend or apply maybe?
   
   // add spend transactions for each payer in spend array
   // spend.forEach((obj) => {

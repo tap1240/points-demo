@@ -26,7 +26,10 @@ const Home = () => {
     return (
       <Fragment>
         {userData ? (
-          <h2>You have {numberWithCommas(userData.points)} points!</h2>
+          <div>
+            <h2>Hey Breeze!</h2>
+            <h3>You have {numberWithCommas(userData.points)} points!</h3>
+          </div>
         ) : null}
       </Fragment>
     );
@@ -53,8 +56,8 @@ const Home = () => {
   const renderImageSection = () => {
     return (
       <div>
-        <img src={breeze1} alt="breeze1" width="20%" />
-        <img src={breeze2} alt="breeze2" width="20%" />
+        <img src={breeze1} alt="breeze1" width="18%" />
+        <img src={breeze2} alt="breeze2" width="18%" />
       </div>
     );
   };
@@ -62,7 +65,6 @@ const Home = () => {
   return (
     <div className="center">
       <div className="center-block">
-        <h1>Hey Breeze!</h1>
         {renderInfoSection()}
 
         {renderButtonSection()}

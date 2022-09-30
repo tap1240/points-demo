@@ -10,13 +10,13 @@ app.use(cors());
 
 // import routes
 const homeRoute = require("./src/routes/home");
+const balanceRoutes = require("./src/routes/balance");
 const txRoutes = require("./src/routes/transactions");
-const payerRoutes = require("./src/routes/payers");
 
 // use the imported routes
 app.use("/", homeRoute);
+app.use("/", balanceRoutes);
 app.use("/", txRoutes);
-app.use("/", payerRoutes);
 
 const PORT = 3001;
 

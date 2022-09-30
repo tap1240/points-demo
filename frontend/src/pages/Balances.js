@@ -10,7 +10,7 @@ export default function Balances() {
 
   const getBalances = async () => {
     try {
-      const response = await fetch("http://localhost:3001/payers");
+      const response = await fetch("http://localhost:3001/balance");
       const jsonData = await response.json();
       setBalances(jsonData);
     } catch (err) {
