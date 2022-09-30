@@ -1,4 +1,5 @@
 const fs = require("fs");
+const uuidv4 = require("uuid").v4;
 
 // reads and sorts transactions from /data/transactions.json
 function getAllTx() {
@@ -46,9 +47,11 @@ function addTx(transaction) {
 }
 
 // spends points from transactions
-// returns
+// returns array of dictionaries of payers and how many points were spent from each
+// format of spend array:
+// [{payer: (string), points: (integer)}]
 function spendPoints(transactions, points) {
-  const spend = {};
+  const spend = [];
 
   // get user balance
   const user = fs.readFileSync("./src/data/user.json");
@@ -60,32 +63,46 @@ function spendPoints(transactions, points) {
     return { error: "insufficient points" };
   }
 
-  // loop through transactions and subtract points from oldest transactions
-  // until points = 0
+  // loop through transactions and subtract points from oldest transactions until points = 0
   transactions.forEach((tx) => {
     if (points === 0) {
       return;
     }
 
-    // get amount of points payer has already spent, if none, set to 0
-    let oldPoints = spend[tx.payer] ? spend[tx.payer] : 0;
+    const payerObj = spend.find((obj) => obj.payer === tx.payer);
 
-    // this tx has enough points to cover remaining points
-    if (tx.points > points) {
-      oldPoints -= points;
-      points = 0;
+    // if payerObj exists, add points to it
+    if (payerObj) {
+      if (tx.points > points) {
+        payerObj.points -= points;
+        points = 0;
+      } else {
+        payerObj.points -= tx.points;
+        points -= tx.points;
+      }
+    } else {
+      // if payerObj doesn't exist, create it
+      if (tx.points > points) {
+        spend.push({ payer: tx.payer, points: -points });
+        points = 0;
+      } else {
+        spend.push({ payer: tx.payer, points: -tx.points });
+        points -= tx.points;
+      }
     }
-    // this tx doesn't have enough points to cover remaining points
-    else {
-      oldPoints -= tx.points;
-      points -= tx.points;
-    }
-
-    // update spend object
-    spend[tx.payer] = oldPoints;
   });
 
-  console.log(spend);
+  // add spend transactions for each payer in spend array
+  spend.forEach((obj) => {
+    const spendTx = {
+      id: uuidv4(),
+      payer: obj.payer,
+      points: obj.points,
+      timestamp: new Date(),
+    };
+    addTx(spendTx);
+  });
+
   return spend;
 }
 

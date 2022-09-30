@@ -36,7 +36,6 @@ router.post("/spend", (req, res) => {
 
 // see comments for /tx/ route
 router.get("/addTxManual", (req, res) => {
-  console.log(req.body);
   if (!req.query.payer || !req.query.points) {
     res.send("missing parameters");
     return;
@@ -54,6 +53,17 @@ router.get("/addTxManual", (req, res) => {
     2
   )}`;
   res.send(response);
+});
+
+router.get("/spendManual", (req, res) => {
+  if (!req.query.points) {
+    res.send("missing parameters");
+    return;
+  }
+  const { points } = req.query;
+  const transactions = getAllTx();
+  const spend = spendPoints(transactions, points);
+  res.send(JSON.stringify(spend, null, 2));
 });
 
 module.exports = router;
