@@ -1,26 +1,24 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { numberWithCommas } from "../utils/helperFunctions";
 import breeze1 from "../assets/breeze1.jpg";
 import breeze2 from "../assets/breeze2.jpg";
+import { numberWithCommas } from "../utils/helperFunctions";
 
 const Home = () => {
   const [userData, setUserData] = useState(null);
 
-  // call the getUsers function when the component loads
   useEffect(() => {
-    getUsers();
+    // fetch the data from the backend
+    const getUser = async () => {
+      try {
+        const response = await fetch("http://localhost:3001/");
+        const jsonData = await response.json();
+        setUserData(jsonData);
+      } catch (err) {
+        console.error(err.message);
+      }
+    };
+    getUser();
   }, []);
-
-  // fetch the data from the backend
-  const getUsers = async () => {
-    try {
-      const response = await fetch("http://localhost:3001/");
-      const jsonData = await response.json();
-      setUserData(jsonData);
-    } catch (err) {
-      console.error(err.message);
-    }
-  };
 
   const renderInfoSection = () => {
     return (

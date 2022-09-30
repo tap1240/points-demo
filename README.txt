@@ -7,11 +7,27 @@ TO RUN FRONTEND AND BACKEND: ---------------------------------------------------
             - starts express server backend on port 3001
             - launches react frontend on port 3000
 
+
 #############################################################################################
+
+
+DATA HANDLING
+
+    - to clear transactions or user data, simply delete the files or the contents of both files in the data folder
+        - transactions.json
+        - user.json
+
+    - exampleTransactions.json is a file that can be used to populate the transactions.json file with dummy data
+        - to use, simply copy the contents of the file and paste it into the transactions.json file
+        - this will populate the transactions.json file with dummy data
+
+
+#############################################################################################
+
 
 BACKEND 
 
-BACKEN TO RUN: ----------------------------------------------------------------------
+BACKEND TO RUN: ----------------------------------------------------------------------
 
     -cd into backend directory and execute 
         - npm i
@@ -63,7 +79,7 @@ BACKEND NOTES ------------------------------------------------------------------
     - backend is a REST API that serves data to the frontend
     - backend data is stored in json files
         - data/transactions.json - stores all transactions
-        - data/users.json - stores the user data 
+        - data/user.json - stores the user data 
             - currently only points are tracked
     
     - app.js - main file that starts the server
@@ -106,6 +122,10 @@ BACKEND NOTES ------------------------------------------------------------------
         - returns array of objects with payer and points spent
             - [{payer1: (string), points1: (integer)}, {payer2: (string), points2: (integer)}]
 
+
+
+    
+
 #############################################################################################
 
 FRONTEND 
@@ -130,3 +150,7 @@ FRONTEND NOTES -----------------------------------------------------------------
         - Transactions - performs a POST request to add a transaction to the backend - "http://localhost:3001/addTx"
         - Spend - performs a POST request to spend points from the backend - "http://localhost:3001/spend"
 
+    - home does not live refresh, must refresh page to see changes
+        - not super concerned about this since it's just a demo app
+        - if it were live, I would use some type of listener to the backend or 
+            use a context to store the user data throughout the app
